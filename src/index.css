@@ -2,87 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Urban Roots AI Design System - Agricultural Tech Theme
+All colors MUST be HSL for consistency.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core agricultural palette */
+    --background: 45 20% 97%;
+    --foreground: 20 14.3% 4.1%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 20 14.3% 4.1%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 20 14.3% 4.1%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Deep forest green for agriculture */
+    --primary: 142 76% 36%;
+    --primary-foreground: 355.7 100% 97.3%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Warm earth tone */
+    --secondary: 25 95% 53%;
+    --secondary-foreground: 20 14.3% 4.1%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted - Soft sage */
+    --muted: 84 26% 88%;
+    --muted-foreground: 25 5.3% 44.7%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Tech blue for innovation */
+    --accent: 210 100% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 84 26% 88%;
+    --input: 84 26% 88%;
+    --ring: 142 76% 36%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Custom agricultural gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(142 76% 36%), hsl(120 60% 45%));
+    --gradient-earth: linear-gradient(45deg, hsl(25 95% 53%), hsl(35 85% 60%));
+    --gradient-tech: linear-gradient(135deg, hsl(210 100% 60%), hsl(220 100% 70%));
+    --gradient-hero: linear-gradient(135deg, hsl(142 76% 36% / 0.95), hsl(25 95% 53% / 0.9));
+    
+    /* Shadows */
+    --shadow-agriculture: 0 10px 40px -10px hsl(142 76% 36% / 0.3);
+    --shadow-earth: 0 8px 25px -5px hsl(25 95% 53% / 0.4);
+    --shadow-tech: 0 8px 30px -8px hsl(210 100% 60% / 0.3);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 20 14.3% 4.1%;
+    --foreground: 45 20% 97%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 12 6.5% 15.1%;
+    --card-foreground: 45 20% 97%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 12 6.5% 15.1%;
+    --popover-foreground: 45 20% 97%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 142 70% 45%;
+    --primary-foreground: 355.7 100% 97.3%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 25 70% 35%;
+    --secondary-foreground: 45 20% 97%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 9.8% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 210 90% 65%;
+    --accent-foreground: 20 14.3% 4.1%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 142 70% 45%;
+
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(142 70% 45%), hsl(120 60% 50%));
+    --gradient-earth: linear-gradient(45deg, hsl(25 70% 35%), hsl(35 75% 45%));
+    --gradient-tech: linear-gradient(135deg, hsl(210 90% 65%), hsl(220 90% 75%));
+    --gradient-hero: linear-gradient(135deg, hsl(142 70% 45% / 0.9), hsl(25 70% 35% / 0.8));
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +120,32 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-balance;
+  }
+}
+
+@layer components {
+  .btn-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-green-600 hover:from-primary/90 hover:to-green-600/90;
+  }
+  
+  .btn-gradient-earth {
+    @apply bg-gradient-to-r from-secondary to-orange-500 hover:from-secondary/90 hover:to-orange-500/90;
+  }
+  
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .card-agriculture {
+    @apply bg-card border border-border shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+  
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-green-600 bg-clip-text text-transparent;
   }
 }
