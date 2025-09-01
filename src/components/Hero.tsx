@@ -28,7 +28,7 @@ const Hero = () => {
           {/* Main Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             Pioneering Deep-Tech
-            <span className="block text-secondary">Agritech for Women</span>
+            <span className="block text-white/95">Agritech for Women</span>
           </h1>
 
           {/* Subheading */}
@@ -40,19 +40,19 @@ const Hero = () => {
           {/* Stats */}
           <div className="flex flex-wrap justify-center gap-8 mb-10">
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-secondary">3</div>
+              <div className="text-3xl md:text-4xl font-bold text-white">3</div>
               <div className="text-sm text-white/80">Active Users</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-secondary">20+</div>
+              <div className="text-3xl md:text-4xl font-bold text-white">20+</div>
               <div className="text-sm text-white/80">Pilot Participants</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-secondary">10%</div>
+              <div className="text-3xl md:text-4xl font-bold text-white">10%</div>
               <div className="text-sm text-white/80">Profit Commitment</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-secondary">100%</div>
+              <div className="text-3xl md:text-4xl font-bold text-white">100%</div>
               <div className="text-sm text-white/80">Focus on Women</div>
             </div>
           </div>
@@ -61,7 +61,7 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
               size="lg" 
-              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground px-8 py-6 text-lg font-semibold rounded-xl"
+              className="bg-white hover:bg-white/90 text-primary px-8 py-6 text-lg font-semibold rounded-xl"
               asChild
             >
               <a href="/join-waitlist" className="flex items-center gap-2">
