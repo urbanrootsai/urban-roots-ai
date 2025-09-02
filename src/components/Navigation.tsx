@@ -44,7 +44,7 @@ const Navigation = () => {
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <Button variant="ghost" size="sm" asChild>
-              <a href="/login">Login</a>
+              <a href="/auth">Login</a>
             </Button>
             <Button size="sm" className="btn-gradient-primary text-primary-foreground" asChild>
               <a href="/join-waitlist">Join Pilot</a>
@@ -78,7 +78,7 @@ const Navigation = () => {
               ))}
               <div className="pt-4 pb-2 space-y-2">
                 <Button variant="ghost" size="sm" className="w-full" asChild>
-                  <a href="/login">Login</a>
+                  <a href="/auth">Login</a>
                 </Button>
                 <Button size="sm" className="w-full btn-gradient-primary text-primary-foreground" asChild>
                   <a href="/join-waitlist">Join Pilot</a>
