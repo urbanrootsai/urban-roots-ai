@@ -6,172 +6,218 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Loader2, Leaf } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { Leaf } from 'lucide-react';
 
-const Auth = () => {
+export default function Auth() {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { signIn, signUp } = useAuth();
-  const { toast } = useToast();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
-  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+  const [loginForm, setLoginForm] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [signupForm, setSignupForm] = useState({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    confirmPassword: '',
+  });
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
 
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-
-    const { error } = await signIn(email, password);
-
+    const { error } = await signIn(loginForm.email, loginForm.password);
+    
     if (error) {
+      setError(error.message);
       toast({
-        title: "Authentication Error",
+        title: "Login Failed",
         description: error.message,
-        variant: "destructive"
+        variant: "destructive",
       });
     } else {
       toast({
         title: "Welcome back!",
-        description: "You have been signed in successfully."
+        description: "You have successfully logged in.",
       });
       navigate('/dashboard');
     }
-
+    
     setIsLoading(false);
   };
 
-  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
 
-    const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const firstName = formData.get('firstName') as string;
-    const lastName = formData.get('lastName') as string;
+    if (signupForm.password !== signupForm.confirmPassword) {
+      setError("Passwords don't match");
+      setIsLoading(false);
+      return;
+    }
 
-    const { error } = await signUp(email, password, firstName, lastName);
+    if (signupForm.password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      setIsLoading(false);
+      return;
+    }
 
+    const { error } = await signUp(
+      signupForm.email, 
+      signupForm.password, 
+      signupForm.firstName, 
+      signupForm.lastName
+    );
+    
     if (error) {
+      setError(error.message);
       toast({
-        title: "Registration Error",
+        title: "Signup Failed",
         description: error.message,
-        variant: "destructive"
+        variant: "destructive",
       });
     } else {
       toast({
-        title: "Registration Successful",
-        description: "Please check your email to verify your account."
+        title: "Account Created!",
+        description: "Please check your email to verify your account.",
       });
     }
-
+    
     setIsLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/20 via-background to-secondary/20 p-4">
       <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1 text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="h-8 w-8 bg-primary rounded-full flex items-center justify-center">
-              <Leaf className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-bold">UrbanRoots AI</span>
+        <CardHeader className="text-center">
+          <div className="flex items-center justify-center mb-4">
+            <Leaf className="h-8 w-8 text-primary" />
           </div>
-          <CardTitle className="text-2xl">Welcome</CardTitle>
+          <CardTitle className="text-2xl font-bold">UrbanRoots AI</CardTitle>
           <CardDescription>
-            Sign in to your account or create a new one to get started with AI-powered agricultural analysis.
+            Advanced agricultural intelligence platform
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue="signin" className="w-full">
+          <Tabs defaultValue="login" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">Sign In</TabsTrigger>
+              <TabsTrigger value="login">Login</TabsTrigger>
               <TabsTrigger value="signup">Sign Up</TabsTrigger>
             </TabsList>
             
-            <TabsContent value="signin">
-              <form onSubmit={handleSignIn} className="space-y-4">
+            <TabsContent value="login">
+              <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signin-email">Email</Label>
+                  <Label htmlFor="email">Email</Label>
                   <Input
-                    id="signin-email"
-                    name="email"
+                    id="email"
                     type="email"
                     placeholder="Enter your email"
+                    value={loginForm.email}
+                    onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signin-password">Password</Label>
+                  <Label htmlFor="password">Password</Label>
                   <Input
-                    id="signin-password"
-                    name="password"
+                    id="password"
                     type="password"
                     placeholder="Enter your password"
+                    value={loginForm.password}
+                    onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
                     required
                   />
                 </div>
-                <Button 
-                  type="submit" 
-                  className="w-full" 
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Signing in..." : "Sign In"}
+                
+                {error && (
+                  <Alert variant="destructive">
+                    <AlertDescription>{error}</AlertDescription>
+                  </Alert>
+                )}
+                
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  Sign In
                 </Button>
               </form>
             </TabsContent>
             
             <TabsContent value="signup">
-              <form onSubmit={handleSignUp} className="space-y-4">
-                <div className="grid grid-cols-2 gap-2">
+              <form onSubmit={handleSignup} className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
                     <Input
                       id="firstName"
-                      name="firstName"
                       placeholder="John"
-                      required
+                      value={signupForm.firstName}
+                      onChange={(e) => setSignupForm({ ...signupForm, firstName: e.target.value })}
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName">Last Name</Label>
                     <Input
                       id="lastName"
-                      name="lastName"
                       placeholder="Doe"
-                      required
+                      value={signupForm.lastName}
+                      onChange={(e) => setSignupForm({ ...signupForm, lastName: e.target.value })}
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
+                  <Label htmlFor="signupEmail">Email</Label>
                   <Input
-                    id="signup-email"
-                    name="email"
+                    id="signupEmail"
                     type="email"
                     placeholder="Enter your email"
+                    value={signupForm.email}
+                    onChange={(e) => setSignupForm({ ...signupForm, email: e.target.value })}
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
+                  <Label htmlFor="signupPassword">Password</Label>
                   <Input
-                    id="signup-password"
-                    name="password"
+                    id="signupPassword"
                     type="password"
                     placeholder="Create a password"
+                    value={signupForm.password}
+                    onChange={(e) => setSignupForm({ ...signupForm, password: e.target.value })}
                     required
                   />
                 </div>
-                <Button 
-                  type="submit" 
-                  className="w-full" 
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Creating account..." : "Create Account"}
+                <div className="space-y-2">
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <Input
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="Confirm your password"
+                    value={signupForm.confirmPassword}
+                    onChange={(e) => setSignupForm({ ...signupForm, confirmPassword: e.target.value })}
+                    required
+                  />
+                </div>
+                
+                {error && (
+                  <Alert variant="destructive">
+                    <AlertDescription>{error}</AlertDescription>
+                  </Alert>
+                )}
+                
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  Create Account
                 </Button>
               </form>
             </TabsContent>
@@ -180,6 +226,4 @@ const Auth = () => {
       </Card>
     </div>
   );
-};
-
-export default Auth;
+}
