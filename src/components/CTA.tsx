@@ -66,10 +66,10 @@ const CTA = () => {
   };
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-12 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
             Get Involved
           </Badge>

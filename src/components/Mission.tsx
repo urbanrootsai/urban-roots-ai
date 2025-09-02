@@ -73,10 +73,10 @@ const Mission = () => {
   ];
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section className="py-12 bg-muted/30">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">
             Our Commitment
           </Badge>
