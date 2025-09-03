@@ -21,16 +21,5 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: 'dist',
-    sourcemap: false,
-    assetsDir: 'assets',
-    rollupOptions: {
-      input: path.resolve(__dirname, 'index.html'),
-      output: {
-        manualChunks: undefined,
-        entryFileNames: 'assets/[name]-[hash].js',
-        chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
-      },
-    },
   },
 }));
