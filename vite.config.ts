@@ -24,9 +24,7 @@ export default defineConfig(({ mode }) => ({
     sourcemap: false,
     assetsDir: 'assets',
     rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'index.html')
-      },
+      input: path.resolve(__dirname, 'index.html'),
       output: {
         manualChunks: undefined,
         entryFileNames: 'assets/[name]-[hash].js',
@@ -35,5 +33,4 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
-  base: './',
 }));
